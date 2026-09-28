@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>Carnes en su Jugo | Encuesta</title>
+
+<style>
+
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  padding: 24px 12px;
+
+  font-family: Arial, Helvetica, sans-serif;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #54210e 0%,
+      #241007 42%,
+      #100805 100%
+    );
+
+  color: #2a160b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* =========================
+   TARJETA PRINCIPAL
+========================= */
+
+.card {
+
+  width: min(100%, 520px);
+
+  background: #fff8e9;
+
+  border-radius: 26px;
+
+  padding: 26px 22px;
+
+  box-shadow:
+    0 22px 55px rgba(0,0,0,.60);
+
+  border: 3px solid #f3c526;
+
+  text-align: center;
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+
+  width: 180px;
+
+  max-width: 60%;
+
+  height: auto;
+
+  display: block;
+
+  margin:
+    0 auto 10px auto;
+}
+
+
+/* =========================
+   TÍTULOS
+========================= */
+
+h1 {
+
+  margin:
+    6px 0 3px;
+
+  font-size: 29px;
+
+  text-transform: uppercase;
+
+  color: #9c1717;
+}
+
+.subtitle {
+
+  margin:
+    0 0 20px;
+
+  color: #6e4a2d;
+}
+
+.question {
+
+  font-weight: 800;
+
+  font-size: 18px;
+
+  margin:
+    20px 0 10px;
+}
+
+
+/* =========================
+   ESTRELLAS
+========================= */
+
+.stars {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-bottom: 6px;
+}
+
+.star {
+
+  border: none;
+
+  background: transparent;
+
+  font-size: 44px;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  color: #d8c8aa;
+
+  transition: .15s;
+
+  filter:
+    drop-shadow(
+      0 2px 1px rgba(0,0,0,.15)
+    );
+}
+
+.star:hover {
+
+  transform: scale(1.10);
+}
+
+.star.active {
+
+  color: #f2b705;
+
+  transform: scale(1.08);
+}
+
+.rating-text {
+
+  height: 22px;
+
+  color: #8d5a19;
+
+  font-weight: bold;
+}
+
+
+/* =========================
+   OPCIONES
+========================= */
+
+.chips {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px;
+
+  margin:
+    12px 0;
+}
+
+.chip {
+
+  border:
+    2px solid #e7d5b5;
+
+  background:
+    #fffdf8;
+
+  padding:
+    12px 8px;
+
+  border-radius:
+    14px;
+
+  font-weight:
+    bold;
+
+  color:
+    #5c331d;
+
+  cursor:
+    pointer;
+
+  transition:
+    .15s;
+}
+
+.chip:hover {
+
+  transform:
+    scale(1.02);
+}
+
+.chip.active {
+
+  background:
+    #ffe27a;
+
+  border-color:
+    #b6251c;
+
+  color:
+    #61120e;
+}
+
+
+/* =========================
+   COMENTARIO
+========================= */
+
+textarea {
+
+  width: 100%;
+
+  min-height: 110px;
+
+  resize: vertical;
+
+  border:
+    2px solid #e1cba8;
+
+  border-radius:
+    15px;
+
+  padding:
+    13px;
+
+  font-size:
+    16px;
+
+  outline:
+    none;
+
+  background:
+    white;
+}
+
+textarea:focus {
+
+  border-color:
+    #e2a600;
+}
+
+
+/* =========================
+   BOTÓN
+========================= */
+
+.send {
+
+  width: 100%;
+
+  margin-top:
+    16px;
+
+  border:
+    none;
+
+  border-radius:
+    15px;
+
+  padding:
+    15px;
+
+  font-size:
+    17px;
+
+  font-weight:
+    900;
+
+  background:
+    #a91f18;
+
+  color:
+    white;
+
+  cursor:
+    pointer;
+
+  box-shadow:
+    0 7px 0 #65100c;
+
+  transition:
+    .1s;
+}
+
+.send:hover {
+
+  background:
+    #bd241c;
+}
+
+.send:active {
+
+  transform:
+    translateY(4px);
+
+  box-shadow:
+    0 3px 0 #65100c;
+}
+
+
+/* =========================
+   TEXTO INFERIOR
+========================= */
+
+.note {
+
+  font-size:
+    12px;
+
+  color:
+    #8b755f;
+
+  margin:
+    15px 0 0;
+}
+
+
+/* =========================
+   PANTALLA DE GRACIAS
+========================= */
+
+.success {
+
+  display:
+    none;
+
+  padding:
+    25px 8px;
+}
+
+.success .check {
+
+  font-size:
+    60px;
+}
+
+.success h2 {
+
+  color:
+    #8f1914;
+
+  font-size:
+    28px;
+}
+
+
+/* =========================
+   TELÉFONOS
+========================= */
+
+@media(max-width: 400px) {
+
+  .chips {
+
+    grid-template-columns:
+      1fr;
+  }
+
+  .star {
+
+    font-size:
+      38px;
+  }
+
+  h1 {
+
+    font-size:
+      25px;
+  }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<main class="card">
+
+
+<!-- ========================
+     ENCUESTA
+======================== -->
+
+<section id="formArea">
+
+
+<!-- LOGO -->
+
+<img
+  src="logo-kj.png"
+  class="logo"
+  alt="Carnes en su Jugo"
+>
+
+
+<h1>
+  Carnes en su Jugo
+</h1>
+
+
+<p class="subtitle">
+  Tu opinión nos ayuda a servirte mejor
+</p>
+
+
+
+<!-- ========================
+     CALIFICACIÓN
+======================== -->
+
+<div class="question">
+
+  ¿Cómo fue tu experiencia?
+
+</div>
+
+
+<div
+  class="stars"
+  id="stars"
+>
+
+<button
+  type="button"
+  class="star"
+  data-value="1"
+>
+★
+</button>
+
+
+<button
+  type="button"
+  class="star"
+  data-value="2"
+>
+★
+</button>
+
+
+<button
+  type="button"
+  class="star"
+  data-value="3"
+>
+★
+</button>
+
+
+<button
+  type="button"
+  class="star"
+  data-value="4"
+>
+★
+</button>
+
+
+<button
+  type="button"
+  class="star"
+  data-value="5"
+>
+★
+</button>
+
+</div>
+
+
+<div
+  class="rating-text"
+  id="ratingText"
+>
+
+Selecciona una calificación
+
+</div>
+
+
+
+<!-- ========================
+     MOTIVOS
+======================== -->
+
+<div class="question">
+
+¿Qué quieres destacar?
+
+</div>
+
+
+<div
+  class="chips"
+  id="chips"
+>
+
+
+<button
+  type="button"
+  class="chip"
+  data-name="Sabor"
+>
+
+🥩 Sabor
+
+</button>
+
+
+<button
+  type="button"
+  class="chip"
+  data-name="Servicio"
+>
+
+🙋 Servicio
+
+</button>
+
+
+<button
+  type="button"
+  class="chip"
+  data-name="Tiempo de espera"
+>
+
+⏱️ Tiempo de espera
+
+</button>
+
+
+<button
+  type="button"
+  class="chip"
+  data-name="Limpieza"
+>
+
+✨ Limpieza
+
+</button>
+
+
+<button
+  type="button"
+  class="chip"
+  data-name="Porciones"
+>
+
+🍽️ Porciones
+
+</button>
+
+
+<button
+  type="button"
+  class="chip"
+  data-name="Precio"
+>
+
+💰 Precio
+
+</button>
+
+
+</div>
+
+
+
+<!-- ========================
+     COMENTARIO
+======================== -->
+
+<div class="question">
+
+Cuéntanos un poco más
+
+</div>
+
+
+<textarea
+  id="comment"
+  placeholder="Escribe aquí tu comentario..."
+></textarea>
+
+
+
+<!-- ========================
+     BOTÓN
+======================== -->
+
+<button
+  type="button"
+  class="send"
+  id="send"
+>
+
+ENVIAR RESEÑA
+
+</button>
+
+
+<p class="note">
+
+Gracias por ayudarnos a mejorar.
+
+</p>
+
+
+</section>
+
+
+
+<!-- ========================
+     MENSAJE FINAL
+======================== -->
+
+<section
+  class="success"
+  id="success"
+>
+
+
+<div class="check">
+
+✅
+
+</div>
+
+
+<h2>
+
+¡Gracias por tu opinión!
+
+</h2>
+
+
+<p>
+
+Tu comentario nos ayuda a mejorar
+cada visita.
+
+</p>
+
+
+<button
+  type="button"
+  class="send"
+  onclick="location.reload()"
+>
+
+NUEVA RESEÑA
+
+</button>
+
+
+</section>
+
+
+</main>
+
+
+
+<script>
+
+/* =========================
+   CALIFICACIÓN
+========================= */
+
+let rating = 0;
+
+
+const ratingLabels = [
+
+  "",
+
+  "Muy mala",
+
+  "Mala",
+
+  "Regular",
+
+  "Muy buena",
+
+  "Excelente"
+
+];
+
+
+const stars =
+  document.querySelectorAll(".star");
+
+
+stars.forEach(function(star) {
+
+
+  star.addEventListener(
+    "click",
+    function() {
+
+
+      rating =
+        Number(
+          this.dataset.value
+        );
+
+
+      stars.forEach(
+        function(item) {
+
+
+          const value =
+            Number(
+              item.dataset.value
+            );
+
+
+          if(value <= rating) {
+
+            item.classList.add(
+              "active"
+            );
+
+          }
+
+          else {
+
+            item.classList.remove(
+              "active"
+            );
+
+          }
+
+
+        }
+      );
+
+
+      document.getElementById(
+        "ratingText"
+      ).textContent =
+
+        rating +
+        " / 5 · " +
+        ratingLabels[rating];
+
+
+    }
+  );
+
+
+});
+
+
+
+/* =========================
+   MOTIVOS
+========================= */
+
+const chips =
+  document.querySelectorAll(
+    ".chip"
+  );
+
+
+chips.forEach(
+  function(chip) {
+
+
+    chip.addEventListener(
+      "click",
+      function() {
+
+
+        this.classList.toggle(
+          "active"
+        );
+
+
+      }
+    );
+
+
+  }
+);
+
+
+
+/* =========================
+   ENVIAR
+========================= */
+
+document.getElementById(
+  "send"
+).addEventListener(
+  "click",
+  function() {
+
+
+    /* Verificar estrellas */
+
+    if(rating === 0) {
+
+
+      alert(
+        "Selecciona de 1 a 5 estrellas."
+      );
+
+
+      return;
+
+    }
+
+
+
+    /* Obtener motivos */
+
+    const selectedReasons = [];
+
+
+    document.querySelectorAll(
+      ".chip.active"
+    ).forEach(
+      function(chip) {
+
+
+        selectedReasons.push(
+          chip.dataset.name
+        );
+
+
+      }
+    );
+
+
+
+    /* Obtener comentario */
+
+    const comment =
+      document.getElementById(
+        "comment"
+      ).value;
+
+
+
+    /* Datos de la encuesta */
+
+    const encuesta = {
+
+
+      calificacion:
+        rating,
+
+
+      motivos:
+        selectedReasons,
+
+
+      comentario:
+        comment
+
+
+    };
+
+
+
+    /* Ver los datos
+       en la consola */
+
+    console.log(
+      "Encuesta:",
+      encuesta
+    );
+
+
+
+    /* Ocultar formulario */
+
+    document.getElementById(
+      "formArea"
+    ).style.display =
+      "none";
+
+
+
+    /* Mostrar gracias */
+
+    document.getElementById(
+      "success"
+    ).style.display =
+      "block";
+
+
+  }
+);
+
+
+</script>
+
+
+</body>
+</html>
